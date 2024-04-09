@@ -30,5 +30,3 @@ vim.keymap.set("n", "<down>", "<nop>")
 
 -- Spell check
 vim.opt.spell = true
-
-
