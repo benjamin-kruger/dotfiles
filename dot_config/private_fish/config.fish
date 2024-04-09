@@ -3,7 +3,7 @@ if status is-interactive
 end
 
 # 1-Password
-op completion fish | source
+# op completion fish | source
 
 # Starship 
 starship init fish | source
