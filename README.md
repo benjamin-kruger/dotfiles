@@ -1,6 +1,6 @@
 # Dot Files
 
-These are my dotfiles with a brief guide to setting up a new machine with Pop_OS!
+These are my dotfiles with a brief guide to setting up a new machine on Pop_OS!
 
 ## First Steps
 - Fresh install of Pop_OS!
