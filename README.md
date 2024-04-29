@@ -41,6 +41,11 @@ These are my dotfiles with a brief guide to setting up a new machine on Pop_OS!
     curl -sS https://starship.rs/install.sh | sh  
     ```
 - Install [JetBrains Mono Nerdfont](https://www.nerdfonts.com/font-downloads) into `~/.fonts` and run `fc-cache -fv`
+
+- Install Zoxide with 
+```
+curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+```
 ## Building Neovim from Source
 - Install the prerequisites
   
@@ -64,7 +69,7 @@ These are my dotfiles with a brief guide to setting up a new machine on Pop_OS!
 ## Cloning the dotfiles
 Run the following command in your terminal:
 - ```
-  chezmoi init https://github.com/benjamin-kruger/dotfiles.git
+  chezmoi init git@github.com:benjamin-kruger/dotfiles.git
   ```
 - ```
   chezmoi apply -v
