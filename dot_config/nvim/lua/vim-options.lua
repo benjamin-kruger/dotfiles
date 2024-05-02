@@ -12,8 +12,8 @@ vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 
 -- Line Numbering
-vim.opt.number = true
-vim.opt.relativenumber = false
+vim.opt.number = false
+vim.opt.relativenumber = true
 
 -- Sync Clipboard between OS and nvim
 vim.opt.clipboard = "unnamedplus"
@@ -30,3 +30,7 @@ vim.keymap.set("n", "<down>", "<nop>")
 
 -- Spell check
 vim.opt.spell = true
+
+-- Half page centers
+vim.keymap.set("n", "<c-d>", "<c-d>zz")
+vim.keymap.set("n", "<c-u>", "<c-u>zz")

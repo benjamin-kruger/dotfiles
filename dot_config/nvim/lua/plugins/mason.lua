@@ -9,5 +9,6 @@ return {
 		dependencies = {
 			"mason.nvim",
 		},
+    opt = { automatic_installation = true, }
 	},
 }

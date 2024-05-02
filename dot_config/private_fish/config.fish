@@ -8,7 +8,7 @@ end
 # Starship 
 starship init fish | source
 
-neofetch
+# neofetch
 
 # Created by `pipx` on 2024-04-08 01:57:12
 set PATH $PATH /Users/ben-kruger/.local/bin

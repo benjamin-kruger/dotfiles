@@ -25,9 +25,7 @@ return {
 			},
 
 			formatter = {
-				zprint = {
-					prepend_args = { "{:search-config? true}" },
-				},
+				zprint = { prepend_args = { "{:search-config? true}" } },
 				sqlfluff = {
 					prepend_args = { "--dialect", "snowflake" },
 				},
