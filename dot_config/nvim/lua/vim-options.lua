@@ -34,3 +34,10 @@ vim.opt.spell = true
 -- Half page centers
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
+
+-- Switch between files
+vim.keymap.set("n", "<leader><leader>", "<c-^>")
+
+-- Case insensitive search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
