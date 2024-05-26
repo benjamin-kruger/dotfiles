@@ -1,30 +1,15 @@
 # Dot Files
 
-These are my dotfiles with a brief guide to setting up a new machine on Pop_OS!
+These are my dotfiles
 
 ## First Steps
-- Fresh install of Pop_OS!
-- Install Gnome Tweaks from Pop_Shop
-- Install [Gnome Shell Extensions](https://extensions.gnome.org/extension/19/user-themes/)
-- Install Catppuccin themes by running the following code:
-  
-  - ```
-    git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme
-    ```
-  - ```
-    mkdir ~/.icons ~/.themes
-    ```
-  - ```
-    cp -r Catppuccin-GTK-Theme/themes ~/.themes && cp -r Catppuccin-GTK-Theme/icons ~/.icons
-    ```
-  - Apply the Catppuccin themes in Gnome Tweaks
 - Install some basic packages:
   
   - ```
-    sudo apt install kitty fish neofetch tmux snapd python3
+    sudo dnf install kitty fish tmux snapd python3
     ```
   - ```
-    sudo snap install spotify && sudo snap install discord && sudo snap install 1password
+    sudo snap install spotify && sudo snap install 1password
     ```
   - ```
     sudo snap install chezmoi --classic
@@ -47,24 +32,8 @@ These are my dotfiles with a brief guide to setting up a new machine on Pop_OS!
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 ```
 ## Building Neovim from Source
-- Install the prerequisites
+- Follow the instructions [here](https://github.com/neovim/neovim/blob/master/BUILD.md).
   
-  ```
-  sudo apt-get install ninja-build gettext cmake unzip curl build-essential
-  ```
-- Clone the repository
-  
-  ```
-  git clone https://github.com/neovim/neovim
-  ```
-- Build and make
-  
-  ```
-  cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-  ```
-  ```
-  sudo make install
-  ```
 
 ## Cloning the dotfiles
 Run the following command in your terminal:
@@ -74,4 +43,4 @@ Run the following command in your terminal:
 - ```
   chezmoi apply -v
   ```
-- Run `nvim` to install all plugins automatically 
+- Run `nvim` to install all plugins automatically
