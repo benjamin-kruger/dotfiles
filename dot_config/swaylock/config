@@ -1,0 +1,21 @@
+indicator-idle-visible
+ignore-empty-password
+indicator-thickness=15
+indicator-radius=100
+color=181825
+ring-color=cba6f7
+ring-ver-color=fab387
+ring-wrong-color=f38ba8
+key-hl-color=fab387
+ring-clear-color=a6e3a1
+inside-color=181825
+inside-clear-color=181825
+inside-ver-color=181825
+inside-wrong-color=181825
+text-color=cdd6f4
+text-clear-color=cdd6f4
+text-wrong-color=cdd6f4
+separator-color=00000000
+font=JetBrains Mono Nerd Font
+text-color=cdd6f4
+text-ver-color=cdd6f4

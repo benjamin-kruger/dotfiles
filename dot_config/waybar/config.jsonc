@@ -1,0 +1,38 @@
+{
+  "layer": "top",
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "battery", "custom/power"],
+
+    "hyprland/workspaces": {
+      "disable=scroll": true,
+      "all-outputs": true,
+      "on-click": "active",
+    },
+    "clock": {
+      "format": "<span color='#fab387'></span>{:%H:%M}",
+    },
+    "pulseaudio": {
+      "format": "<span color='#fab387'>{icon}  </span> {volume}%",
+      "format-muted": "",
+      "tooltip": false,
+      "format-icons": {
+        "headphone": "",
+        "default": ["", "", "󰕾", "󰕾", "󰕾", " ", " ", " "]
+      }  
+    },
+      "scroll-step": 1,
+   "battery": {
+    	"states": {
+		"warning": 20,
+		"critical": 15
+	},
+	"format": "󰁹 {capacity}%",
+	"format-charging": "󰂄 {capacity}%",
+	"format-plugged": "󰂄 {capacity}%"
+    },
+  "custom/power": {
+        "format": "<span color = '#fab387'>󰐥  </span>",
+        "on-click": "rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu"
+    }
+}
