@@ -41,3 +41,7 @@ vim.keymap.set("n", "<leader><leader>", "<c-^>")
 -- Case insensitive search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- Obsidian binds
+vim.keymap.set("n", "<leader>on", ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>")
+vim.keymap.set("n", "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>")
