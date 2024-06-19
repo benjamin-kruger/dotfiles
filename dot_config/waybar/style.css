@@ -1,6 +1,6 @@
-/*@import "catppuccin.css";*/
+@import "catppuccin.css";
 
-@import "everforest.css";
+/*@import "everforest.css";*/
 
 * {
   border: none;

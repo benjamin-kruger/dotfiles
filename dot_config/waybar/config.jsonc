@@ -12,10 +12,10 @@
       "on-click": "active",
     },
     "clock": {
-      "format": "<span color='#A7C080'></span>{:%H:%M}",
+      "format": "<span color='#fab387'></span>{:%H:%M}",
     },
     "pulseaudio": {
-      "format": "<span color='#A7C080'>{icon}  </span> {volume}%",
+      "format": "<span color='#fab387'>{icon}  </span> {volume}%",
       "format-muted": "",
       "tooltip": false,
       "format-icons": {
@@ -34,7 +34,7 @@
 	"format-plugged": "󰂄 {capacity}%"
     },
   "custom/power": {
-        "format": "<span color = '#A7C080'>󰐥  </span>",
+        "format": "<span color = '#fab387'>󰐥  </span>",
         "on-click": "rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu"
     }
 }
