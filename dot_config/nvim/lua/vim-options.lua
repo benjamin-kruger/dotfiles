@@ -4,9 +4,6 @@ vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 
--- Global Leader
-vim.g.mapleader = " "
-
 -- Line Numbering
 vim.opt.number = false
 vim.opt.relativenumber = true

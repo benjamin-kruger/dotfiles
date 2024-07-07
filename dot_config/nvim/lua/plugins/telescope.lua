@@ -27,7 +27,7 @@ return {
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 			vim.keymap.set("n", "<leader>cm", builtin.git_commits, {})
 			vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
-			vim.keymap.set("n", "<leader>gt", builtin.git_status, {})
+			vim.keymap.set("n", "<leader>gs", builtin.git_status, {})
 			require("telescope").load_extension("ui-select")
 		end,
 	},

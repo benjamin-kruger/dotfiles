@@ -1,115 +1,102 @@
--- Configuration of LSP servers
--- List of servers to set up along with custom configuration
-local servers = {
-	-- Lua
-	lua_ls = {
-		Lua = {
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim", "use" },
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			telemetry = {
-				enable = false,
-			},
-		},
-	},
-	pyright = {
-		python = {
-			analysis = {
-				useLibraryCodeForTypes = true,
-			},
-		},
-	},
-	ruff_lsp = {},
-	cssls = {},
-	-- clojure_lsp = {},
-}
-
--- LSP uses an `on_attach` function which runs whenever a server is connected to a buffer
-local on_attach = function(_, bufnr)
-	local nmap = function(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-	end
-
-	-- Formatting provided by 'conform' plugin, which falls back to LSP formatting
-	-- nmap("<leader>lf", vim.lsp.buf.format, "Format")
-	nmap("<leader>lr", vim.lsp.buf.rename, "LSP: Rename")
-	nmap("<leader>la", vim.lsp.buf.code_action, "Code action")
-
-	nmap("gd", vim.lsp.buf.definition, "Go to definition")
-	nmap("gr", require("telescope.builtin").lsp_references, "Go to references")
-	nmap("gI", vim.lsp.buf.implementation, "Go to implementation")
-	nmap("gD", vim.lsp.buf.declaration, "Go to declaration")
-
-	nmap("<leader>lh", vim.lsp.buf.hover, "LSP: Hover")
-	nmap("<leader>ld", vim.diagnostic.open_float, "LSP: Diagnostics")
-	nmap("<leader>lD", require("telescope.builtin").diagnostics, "Search for diagnostics")
-
-	nmap("<leader>ls", require("telescope.builtin").lsp_document_symbols, "Document symbols")
-	nmap("<leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace symbols")
-end
-
--- Capabilities define what the LSP server should support
-local capabilities = vim.tbl_deep_extend(
-	"force",
-	vim.lsp.protocol.make_client_capabilities(),
-	require("cmp_nvim_lsp").default_capabilities()
-)
-capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false -- Bugs out python with latest lsp version
-
 return {
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"hrsh7th/cmp-nvim-lsp",
-		},
-		opts = {
-			diagnostics = {
-				virtual_text = true,
-				update_in_insert = true,
-				severity_sort = true,
-				float = {
-					border = "rounded",
-				},
-			},
-		},
-		config = function(_, opts)
-			-- Setup servers
-			for server, settings in pairs(servers) do
-				require("lspconfig")[server].setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = settings,
-				})
-			end
-			require("lspconfig").clojure_lsp.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				cmd = {
-					"clojure-lsp",
-					"-XX:MaximumHeapSizePercent=25",
-				},
-				settings = {},
-			})
+    "neovim/nvim-lspconfig",
+    dependencies = {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/nvim-cmp",
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+        "j-hui/fidget.nvim",
+    },
 
-			-- Diagnostics
-			local diagnosticsIcons = {
-				Error = "",
-				Warn = "",
-				Hint = "",
-				Info = "",
-			}
-			for name, icon in pairs(diagnosticsIcons) do
-				name = "DiagnosticSign" .. name
-				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-			end
-			vim.diagnostic.config(opts.diagnostics)
-		end,
-	},
+    config = function()
+        local cmp = require('cmp')
+        local cmp_lsp = require("cmp_nvim_lsp")
+        local capabilities = vim.tbl_deep_extend(
+            "force",
+            {},
+            vim.lsp.protocol.make_client_capabilities(),
+            cmp_lsp.default_capabilities())
+
+        require("fidget").setup({})
+        require("mason").setup()
+        require("mason-lspconfig").setup({
+            ensure_installed = {
+                "lua_ls",
+                "rust_analyzer",
+                "clangd",
+                "ruff",
+                "clojure_lsp",
+                "marksman",
+                "yamlls",
+                "sqlls",
+                "eslint",
+                "tsserver",
+            },
+            handlers = {
+                function(server_name) -- default handler (optional)
+                    require("lspconfig")[server_name].setup {
+                        capabilities = capabilities
+                    }
+                end,
+
+                ["lua_ls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.lua_ls.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            Lua = {
+                                runtime = { version = "Lua 5.1" },
+                                diagnostics = {
+                                    globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+                                }
+                            }
+                        }
+                    }
+                end,
+            }
+        })
+
+        local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+        cmp.setup({
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                end,
+            },
+            mapping = cmp.mapping.preset.insert({
+                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                ["<C-Space>"] = cmp.mapping.complete(),
+            }),
+            sources = cmp.config.sources({
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' }, -- For luasnip users.
+            }, {
+                { name = 'buffer' },
+            })
+        })
+
+        vim.diagnostic.config({
+            -- update_in_insert = true,
+            float = {
+                focusable = false,
+                style = "minimal",
+                border = "rounded",
+                source = "always",
+                header = "",
+                prefix = "",
+            },
+        })
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
+        vim.keymap.set("n", "ca", vim.lsp.buf.code_action, {})
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+    end
 }
