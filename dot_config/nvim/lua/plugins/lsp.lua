@@ -36,6 +36,7 @@ return {
                 "sqlls",
                 "eslint",
                 "tsserver",
+                "texlab",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
