@@ -6,7 +6,7 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "ruff" },
+				python = { "ruff_format", "ruff_fix" },
 				clojure = { "zprint" },
 				sql = { "sqlfluff" },
 				sh = { "shfmt" },

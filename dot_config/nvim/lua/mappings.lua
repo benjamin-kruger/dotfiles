@@ -27,3 +27,7 @@ vim.keymap.set("n", "<leader><leader>", "<c-^>")
 -- Obsidian binds
 vim.keymap.set("n", "<leader>on", ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>")
 vim.keymap.set("n", "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>")
+
+-- Copilot Disable
+vim.keymap.set("n", "<leader>cd", "<cmd>Copilot disable<cr>")
+vim.keymap.set("n", "<leader>ce", "<cmd>Copilot enable<cr>")
